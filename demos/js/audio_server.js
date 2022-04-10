@@ -38,7 +38,8 @@ function appInit() {
 }
 
 function connect() {
-  console.log("Initializing.");
+  console.log("Initializing. server");
+  easyrtc.setUsername('server');
   easyrtc.enableVideo(false);
   easyrtc.enableVideoReceive(false);
   easyrtc.enableAudio(true);
@@ -116,6 +117,7 @@ function loginSuccess(easyrtcid, roomOwner) {
   enable("otherClients");
   selfEasyrtcid = easyrtcid;
   document.getElementById("iam").innerHTML = "I am " + easyrtcid;
+  easyrtc.setRoomApiField("default", 'server', true)
 }
 
 function loginFailure(errorCode, message) {
@@ -132,9 +134,9 @@ function disconnect() {
 }
 
 easyrtc.setStreamAcceptor(function (easyrtcid, stream) {
-  var audio = document.getElementById("callerAudio");
-  easyrtc.setVideoObjectSrc(audio, stream);
-  enable("hangupButton");
+  console.log("setStreamAcceptor", easyrtcid);
+//  var audio = document.getElementById("callerAudio");
+ // easyrtc.setVideoObjectSrc(audio, stream);
 });
 
 easyrtc.setOnStreamClosed(function (easyrtcid) {
@@ -143,6 +145,6 @@ easyrtc.setOnStreamClosed(function (easyrtcid) {
 });
 
 easyrtc.setAcceptChecker(function (easyrtcid, callback) {
-  console.log("accepting call from " + easyrtcid);
+  console.log("setAcceptChecker", easyrtcid);
   callback(true);
 });
