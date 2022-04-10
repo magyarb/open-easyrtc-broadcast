@@ -36,7 +36,7 @@
   "scripts": {
     "lint": "grunt lint",
     "cleanup": "rm -fr node_modules/ && npm install && rm -fr bower_components/ && bower install",
-    "build": "grunt build",
+    "build": "grunt build && cd ./server_example && npm install && grunt build && cd ..",
     "test": "grunt test",
     "test-headless": "grunt test-headless",
     "start": "cd ./server_example && node server.js"
