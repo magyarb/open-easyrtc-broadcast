@@ -1,4 +1,5 @@
 // Load required modules
+var port = process.env.PORT || 8080;
 var http = require("http"); // http server core module
 var express = require("express"); // web framework external module
 var serveStatic = require("serve-static"); // serve static files
@@ -107,6 +108,6 @@ var rtc = easyrtc.listen(app, socketServer, null, function (err, rtcRef) {
 });
 
 // Listen on port 8080
-webServer.listen(process.env.$PORT, function () {
-  console.log("listening on http://localhost:" + process.env.$PORT);
+webServer.listen(port, function () {
+  console.log("listening on http://localhost:" + port);
 });
