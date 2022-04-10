@@ -43,7 +43,7 @@ function connect() {
   easyrtc.enableVideoReceive(false);
   easyrtc.enableAudio(true);
   easyrtc.enableAudioReceive(true);
-  easyrtc.enableMicrophone(false);
+  easyrtc.enableMicrophone(true);
   easyrtc.setRoomOccupantListener(roomOccupantsChanged);
   easyrtc.connect("easyrtc.audioOnly", loginSuccess, loginFailure);
   /* easyrtc.initMediaSource(
