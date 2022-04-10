@@ -44,7 +44,7 @@ function connect() {
   easyrtc.enableVideoReceive(false);
   easyrtc.enableAudio(true);
   easyrtc.enableAudioReceive(false);
-  easyrtc.setRoomOccupantListener(convertListToButtons);
+  easyrtc.setRoomOccupantListener(roomOccupantsChanged);
   easyrtc.initMediaSource(
     function () {
       // success callback
@@ -69,6 +69,36 @@ function clearConnectList() {
   otherClientDiv = document.getElementById("otherClients");
   while (otherClientDiv.hasChildNodes()) {
     otherClientDiv.removeChild(otherClientDiv.lastChild);
+  }
+}
+
+function roomOccupantsChanged(roomName, occupants, isPrimary) {
+  console.log("roomOccupantsChanged", roomName, occupants, isPrimary);
+
+  var acceptedCB = function (accepted, caller) {
+    if (!accepted) {
+      easyrtc.showError(
+        "CALL-REJECTED",
+        "Sorry, your call to " + easyrtc.idToName(caller) + " was rejected"
+      );
+      enable("otherClients");
+    }
+  };
+  var successCB = function () {
+    console.log('connected.')
+    enable("hangupButton");
+  };
+  var failureCB = function () {
+    enable("otherClients");
+  };
+
+  for (var oid of Object.keys(occupants)) {
+    let occupant = occupants[oid];
+   /* if (occupant.apiField.server) {
+      console.log("found the server", occupant);
+    }*/
+    console.log('calling', occupant.easyrtcid)
+    easyrtc.call(occupant.easyrtcid, successCB, failureCB, acceptedCB);
   }
 }
 

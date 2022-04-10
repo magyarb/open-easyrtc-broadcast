@@ -43,7 +43,7 @@ function connect() {
   easyrtc.enableVideoReceive(false);
   easyrtc.enableAudio(true);
   easyrtc.enableAudioReceive(true);
-  easyrtc.enableMicrophone(true);
+  easyrtc.enableMicrophone(false);
   easyrtc.setRoomOccupantListener(roomOccupantsChanged);
   easyrtc.connect("easyrtc.audioOnly", loginSuccess, loginFailure);
   /* easyrtc.initMediaSource(
@@ -96,7 +96,7 @@ function roomOccupantsChanged(roomName, occupants, isPrimary) {
     let occupant = occupants[oid];
     if (occupant.apiField.server) {
       console.log("found the server", occupant);
-      easyrtc.call(occupant.easyrtcid, successCB, failureCB, acceptedCB);
+      //easyrtc.call(occupant.easyrtcid, successCB, failureCB, acceptedCB);
     }
   }
 }
@@ -156,5 +156,5 @@ easyrtc.setOnStreamClosed(function (easyrtcid) {
 });
 easyrtc.setAcceptChecker(function (easyrtcid, callback) {
   console.log("setAcceptChecker", easyrtcid);
-  callback(false);
+  callback(true);
 });
