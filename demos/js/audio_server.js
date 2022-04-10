@@ -73,6 +73,7 @@ function clearConnectList() {
 }
 
 function roomOccupantsChanged(roomName, occupants, isPrimary) {
+  easyrtc.hangupAll();
   console.log("roomOccupantsChanged", roomName, occupants, isPrimary);
 
   var acceptedCB = function (accepted, caller) {
