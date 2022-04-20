@@ -24,6 +24,7 @@
 //POSSIBILITY OF SUCH DAMAGE.
 //
 var selfEasyrtcid = "";
+var maxCALLERS = 200;
 
 function disable(domId) {
   document.getElementById(domId).disabled = "disabled";
@@ -130,14 +131,14 @@ function performCall(otherEasyrtcid) {
         "CALL-REJECTED",
         "Sorry, your call to " + easyrtc.idToName(caller) + " was rejected"
       );
-      enable("otherClients");
+      //enable("otherClients");
     }
   };
   var successCB = function () {
-    enable("hangupButton");
+    //enable("hangupButton");
   };
   var failureCB = function () {
-    enable("otherClients");
+    //enable("otherClients");
   };
   easyrtc.call(otherEasyrtcid, successCB, failureCB, acceptedCB);
 }
@@ -146,9 +147,9 @@ function loginSuccess(easyrtcid, roomOwner) {
   console.log("loginSuccess", easyrtcid, roomOwner);
   //disable("connectButton");
   // enable("disconnectButton");
-  enable("otherClients");
+  //enable("otherClients");
   selfEasyrtcid = easyrtcid;
-  document.getElementById("iam").innerHTML = "I am " + easyrtcid;
+  document.getElementById("iam").innerHTML = "Connected";
 }
 
 function loginFailure(errorCode, message) {
@@ -159,7 +160,7 @@ function disconnect() {
   document.getElementById("iam").innerHTML = "logged out";
   easyrtc.disconnect();
   console.log("disconnecting from server");
-  enable("connectButton");
+  //enable("connectButton");
   // disable("disconnectButton");
   clearConnectList();
 }
@@ -167,7 +168,7 @@ function disconnect() {
 easyrtc.setStreamAcceptor(function (easyrtcid, stream) {
   var audio = document.getElementById("callerAudio");
   easyrtc.setVideoObjectSrc(audio, stream);
-  enable("hangupButton");
+  //enable("hangupButton");
 });
 
 easyrtc.setOnStreamClosed(function (easyrtcid) {

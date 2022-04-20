@@ -1,20 +1,88 @@
 <!DOCTYPE html>
 <html>
-<head>
-    <title>EasyRTC - Server Root</title>
-    <script type="text/javascript">
-        function forward(){ window.location = "./demos/";}
-    </script>
-</head>
-<body onload="setTimeout('forward()', 10000)">
-    <h1>You have installed EasyRTC!</h1>
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <!--skip-->
+    <title>Client</title>
+    <link rel="stylesheet" type="text/css" href="../easyrtc/easyrtc.css" />
 
-    <h2>This is your server's Web Root</h2>
+    <!--hide-->
+    <link rel="stylesheet" type="text/css" href="css/landing.css" />
 
-    <p>This is the easiest location to put your own static html files for developing WebRTC applications.</p>
+    <!-- Prettify Code -->
+    <script
+      type="text/javascript"
+      src="/demos/js/prettify/prettify.js"
+    ></script>
+    <script
+      type="text/javascript"
+      src="/demos/js/prettify/loadAndFilter.js"
+    ></script>
+    <script
+      type="text/javascript"
+      src="/demos/js/prettify/jquery.min.js"
+    ></script>
+    <link
+      rel="stylesheet"
+      type="text/css"
+      href="/demos/js/prettify/prettify.css"
+    />
 
-    <p>In the meantime we'll forward you to <a href="./demos/">the EasyRTC Demo page</a>...</p>
+    <!--show-->
+    <!-- Assumes global locations for socket.io.js and easyrtc.js -->
+    <script src="/socket.io/socket.io.js"></script>
+    <script type="text/javascript" src="/easyrtc/easyrtc.js"></script>
+    <script type="text/javascript" src="js/audio_client.js"></script>
+    <!--hide-->
+    <!-- Styles used within the demo -->
+    <style type="text/css">
+      #demoContainer {
+        position: relative;
+      }
 
-    <a href="http://www.easyrtc.com/"><img src="easyrtc/img/powered_by_easyrtc.png" width="200" height="60" alt="Powered by EasyRTC"></a>
-</body>
+      #connectControls {
+        float: left;
+        width: 250px;
+        text-align: center;
+        border: 2px solid black;
+      }
+
+      #otherClients {
+        height: 200px;
+        overflow-y: scroll;
+      }
+
+      #callerAudio {
+        /* display: none;*/
+        height: 0px;
+        width: 0px;
+        margin-left: 10px;
+      }
+
+      #acceptCallBox {
+        display: none;
+        z-index: 2;
+        position: absolute;
+        top: 100px;
+        left: 400px;
+        border: red solid 2px;
+        background-color: pink;
+        padding: 15px;
+      }
+    </style>
+    <!--show-->
+  </head>
+
+  <body onload="appInit()" style="background-color: #424242">
+    <div id="container" style="text-align: center">
+      <video
+        id="callerAudio"
+        autoplay="autoplay"
+        playsinline="playsinline"
+      ></video>
+      <img src="color.png" style="max-width: 90vw; max-height: 90vh" />
+      <div id="iam" style="text-align: center; color: white">Connecting...</div>
+    </div>
+    <!--show-->
+  </body>
 </html>
