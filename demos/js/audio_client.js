@@ -26,11 +26,13 @@
 var selfEasyrtcid = "";
 
 function disable(domId) {
-  document.getElementById(domId).disabled = "disabled";
+  console.log("disable", domId);
+  //document.getElementById(domId).disabled = "disabled";
 }
 
 function enable(domId) {
-  document.getElementById(domId).disabled = "";
+  console.log("enable", domId);
+  //document.getElementById(domId).disabled = "";
 }
 
 function appInit() {
